@@ -3,6 +3,7 @@
     <dimen name="table_text_padding">2dp</dimen>
     <dimen name="table_image_padding">8dp</dimen>
     <dimen name="action_btn_margin">20dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 
 </resources>

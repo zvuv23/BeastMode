@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BeastMode</string>
+    <string name="title_activity_exercise_list">ExerciseListActivity</string>
 </resources>

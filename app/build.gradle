@@ -53,5 +53,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
+    //generic list adapter
+    implementation "com.leodroidcoder:generic-adapter:1.0.1"
 
 }
