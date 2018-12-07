@@ -6,6 +6,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface WgerExerciseService {
 
@@ -19,4 +20,7 @@ public interface WgerExerciseService {
 
     @GET("exercise/?status=2&language=2")
     Call<ExerciseList> getExercises();
+
+    @GET("exercise/{query}")
+    Call<ExerciseList> getExercises(@Path("query") String query);
 }

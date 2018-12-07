@@ -36,7 +36,7 @@ public class WorkoutRoutineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_workout_routine, container, false);
-        _RecyclerView = (RecyclerView) rootView.findViewById(R.id.routineExercisesRecyclerView);
+        _RecyclerView = rootView.findViewById(R.id.routineExercisesRecyclerView);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView

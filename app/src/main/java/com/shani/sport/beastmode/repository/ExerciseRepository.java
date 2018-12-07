@@ -32,23 +32,31 @@ public class ExerciseRepository implements IExerciseRepository {
     @Override
     public LiveData<List<WgerExercise>> getExercises() {
 
-        _exerciseService.getExercises().enqueue(new Callback<ExerciseList>() {
-            @Override
-            public void onResponse(Call<ExerciseList> call, Response<ExerciseList> response) {
-                Log.d("TAG",response.code()+"");
-
-                ExerciseList exerciseList = response.body();
-                if (exerciseList != null) {
-                    _exerciseDao.save(exerciseList.getResults());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ExerciseList> call, Throwable t) {
-                call.cancel();
-            }
-        });
+        _exerciseService.getExercises().enqueue(new getExercisesCallback());
 
         return _exerciseDao.load();
+    }
+
+    class getExercisesCallback implements Callback<ExerciseList>{
+
+        @Override
+        public void onResponse(Call<ExerciseList> call, Response<ExerciseList> response) {
+            Log.d("TAG",response.code()+"");
+
+            ExerciseList exerciseList = response.body();
+            if (exerciseList.getNext() != null){
+                String[] split = exerciseList.getNext().split("/");
+                _exerciseService.getExercises(split[split.length -1]).enqueue(new getExercisesCallback());
+            }
+
+            if (exerciseList != null) {
+                _exerciseDao.save(exerciseList.getResults());
+            }
+        }
+
+        @Override
+        public void onFailure(Call<ExerciseList> call, Throwable t) {
+            call.cancel();
+        }
     }
 }

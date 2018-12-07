@@ -9,12 +9,12 @@ import com.shani.sport.beastmode.model.WgerExercise;
 
 import java.util.List;
 
-import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
+import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 
 @Dao
 public interface ExerciseDao {
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = IGNORE)
     void save(List<WgerExercise> exercises);
 
     @Query("SELECT * FROM exercises")
