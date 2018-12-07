@@ -74,4 +74,11 @@ public class WorkoutRoutineAdapter extends GenericRecyclerViewAdapter<WgerExerci
         return new MyViewHolder(inflate(R.layout.workout_exercise_card, parent), getListener());
     }
 
+    @Override
+    public void setItems(List<WgerExercise> items) {
+        if (items == null){
+            return;
+        }
+        super.setItems(items);
+    }
 }

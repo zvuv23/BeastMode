@@ -57,4 +57,12 @@ public class ExerciseListAdapter extends GenericRecyclerViewAdapter<WgerExercise
         return new ExerciseListAdapter.MyViewHolder(inflate(R.layout.content_exercise_list, parent), getListener());
     }
 
+    @Override
+    public void setItems(List<WgerExercise> items) {
+        if (items == null){
+            return;
+        }
+        super.setItems(items);
+    }
+
 }
