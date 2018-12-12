@@ -1,6 +1,7 @@
 package com.shani.sport.beastmode.view;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,17 +19,23 @@ import com.leodroidcoder.genericadapter.GenericRecyclerViewAdapter;
 import com.shani.sport.beastmode.R;
 import com.shani.sport.beastmode.adapter.ExerciseListAdapter;
 import com.shani.sport.beastmode.adapter.WorkoutRoutineAdapter;
+import com.shani.sport.beastmode.di.Injectable;
 import com.shani.sport.beastmode.model.WgerExercise;
 import com.shani.sport.beastmode.viewmodel.ExerciseListViewModel;
 import com.shani.sport.beastmode.viewmodel.WorkoutRoutineViewModel;
 
 import java.util.List;
 
-public class ExerciseListFragment extends Fragment {
+import javax.inject.Inject;
+
+public class ExerciseListFragment extends Fragment implements Injectable {
 
     private RecyclerView _RecyclerView;
     private GenericRecyclerViewAdapter _adapter;
     private ExerciseListViewModel _viewModel;
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
     public static ExerciseListFragment newInstance() {
         return new ExerciseListFragment();
@@ -57,8 +64,9 @@ public class ExerciseListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        _viewModel = ViewModelProviders.of(this).get(ExerciseListViewModel.class);
-
+//        _viewModel = ViewModelProviders.of(this).get(ExerciseListViewModel.class);
+        _viewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(ExerciseListViewModel.class);
         LiveData<List<WgerExercise>> exerciseListLiveData = _viewModel.getExercises();
         //update the list of the adapter once data changes
         exerciseListLiveData.observe(this, exerciseList -> {

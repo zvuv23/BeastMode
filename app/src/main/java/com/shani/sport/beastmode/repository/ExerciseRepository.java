@@ -13,18 +13,23 @@ import com.shani.sport.beastmode.pojo.ExerciseList;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Singleton
 public class ExerciseRepository implements IExerciseRepository {
 
     private WgerExerciseService _exerciseService;
     private final ExerciseDao _exerciseDao;
 
-
-    public ExerciseRepository(Application application){
-        _exerciseService = WgerAPIClient.getClient().create(WgerExerciseService.class);
+    @Inject
+    public ExerciseRepository(Application application, WgerExerciseService exerciseService){
+        _exerciseService = exerciseService;
+//        _exerciseService = WgerAPIClient.getClient().create(WgerExerciseService.class);
         _exerciseDao = ExerciseDatabase.getInstance(application)._exerciseDao();
 
     }

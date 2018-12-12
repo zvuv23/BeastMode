@@ -10,6 +10,8 @@ import retrofit2.http.Path;
 
 public interface WgerExerciseService {
 
+    public static final String BASE_URL = "https://wger.de/api/v2/";
+
     /**
      * @GET declares an HTTP GET request
      * @Path("user") annotation on the userId parameter marks it as a
